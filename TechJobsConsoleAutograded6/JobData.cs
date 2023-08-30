@@ -47,8 +47,21 @@ namespace TechJobsConsoleAutograded6
             // load data, if not already loaded
             LoadData();
 
-            return null;
+            List<Dictionary<string, string>> searchResults = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string,string> row in AllJobs)
+            {
+
+                string search = row[value];
+
+                if (search.Contains(value))
+                {
+                    searchResults.Add(row);   
+                }
+            }
+           return searchResults;
         }
+
 
         /**
          * Returns results of search the jobs data by key/value, using
@@ -56,6 +69,13 @@ namespace TechJobsConsoleAutograded6
          *
          * For example, searching for employer "Enterprise" will include results
          * with "Enterprise Holdings, Inc".
+         *  //inner loop goes through each attribute in job 
+                //nested foreach loop 
+                //within each job loop through the key
+                //loop through all the keys, compare the value to 
+                //loop through the keys of the dictionary
+                //string job = term[value];
+                //add breakstatement to break out of inner for loop if there is a match
          */
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
