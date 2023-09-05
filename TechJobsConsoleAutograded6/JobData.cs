@@ -3,8 +3,8 @@ using System.Text;
 
 namespace TechJobsConsoleAutograded6
 {
-	public class JobData
-	{
+    public class JobData
+    {
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
 
@@ -47,8 +47,26 @@ namespace TechJobsConsoleAutograded6
             // load data, if not already loaded
             LoadData();
 
-            return null;
+            List<Dictionary<string, string>> searchResults = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (var kvp in row)
+                {
+
+                    string search = kvp.Value;
+
+                    if (search.Contains(value))
+                    {
+                        searchResults.Add(row);
+                    }
+
+                }
+            }
+
+            return searchResults;
         }
+    
 
         /**
          * Returns results of search the jobs data by key/value, using
@@ -70,12 +88,16 @@ namespace TechJobsConsoleAutograded6
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
-                }
+                } 
+                
             }
-
+            if (jobs.Count == 0)
+            {
+                Console.WriteLine("No results");
+            }
             return jobs;
         }
 
