@@ -64,7 +64,7 @@ namespace TechJobsConsoleAutograded6
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        List<Dictionary<string, string>> searchResults = JobData.FindByValue(searchTerm);
+                        var searchResults = JobData.FindByValue(searchTerm);
                         PrintJobs(searchResults);
                     }
                     else
@@ -138,15 +138,15 @@ namespace TechJobsConsoleAutograded6
         {
             foreach (var jobDict in someJobs)
             {
-                Console.WriteLine(jobDict);
+                Console.WriteLine();
                 Console.WriteLine("*****");
                 foreach (var kvp in jobDict)
                 {
                     Console.WriteLine($"{kvp.Key}: {kvp.Value}");
                 }
                 Console.WriteLine("*****");
-                Console.WriteLine();
             }
+            
         }
     }
 }

@@ -3,8 +3,8 @@ using System.Text;
 
 namespace TechJobsConsoleAutograded6
 {
-	public class JobData
-	{
+    public class JobData
+    {
         static List<Dictionary<string, string>> AllJobs = new List<Dictionary<string, string>>();
         static bool IsDataLoaded = false;
 
@@ -49,19 +49,24 @@ namespace TechJobsConsoleAutograded6
 
             List<Dictionary<string, string>> searchResults = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string,string> row in AllJobs)
+            foreach (Dictionary<string, string> row in AllJobs)
             {
-
-                string search = row[value];
-
-                if (search.Contains(value))
+                foreach (var kvp in row)
                 {
-                    searchResults.Add(row);   
+
+                    string search = kvp.Value;
+
+                    if (search.Contains(value))
+                    {
+                        searchResults.Add(row);
+                    }
+
                 }
             }
-           return searchResults;
-        }
 
+            return searchResults;
+        }
+    
 
         /**
          * Returns results of search the jobs data by key/value, using
@@ -69,13 +74,6 @@ namespace TechJobsConsoleAutograded6
          *
          * For example, searching for employer "Enterprise" will include results
          * with "Enterprise Holdings, Inc".
-         *  //inner loop goes through each attribute in job 
-                //nested foreach loop 
-                //within each job loop through the key
-                //loop through all the keys, compare the value to 
-                //loop through the keys of the dictionary
-                //string job = term[value];
-                //add breakstatement to break out of inner for loop if there is a match
          */
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
@@ -90,12 +88,16 @@ namespace TechJobsConsoleAutograded6
 
 
                 //TODO: Make search case-insensitive
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
-                }
+                } 
+                
             }
-
+            if (jobs.Count == 0)
+            {
+                Console.WriteLine("No results");
+            }
             return jobs;
         }
 
